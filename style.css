@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bodyBgColor: #030307;
+  --brightWhiteColor: #f8f8ff;
+  --inputColor: #dadadb;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bodyBgColor);
+}
+ul {
+  list-style: none;
+}
+section {
+  display: grid;
+  grid-template-rows: auto auto;
+  width: 95%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+header h1 {
+  color: var(--brightWhiteColor);
+}
+header form {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0 30px 0;
+}
+header form input {
+  background: #1c222b;
+  height: 25px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--inputColor);
+  text-indent: 20px;
+  border-radius: 2px;
+}
+header form input::placeholder {
+  color: var(--inputColor);
+}
+header form button {
+  outline: none;
+  border: none;
+  margin-top: 10px;
+  height: 30px;
+  background: linear-gradient(to right, #4776e6, #8e54e9);
+  color: var(--brightWhiteColor);
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.my-wishes li {
+  /* background: linear-gradient(to right, #da22ff, #9733ee); */
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  align-items: center;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.my-wishes li p {
+  color: var(--brightWhiteColor);
+  padding: 0 10px;
+}
+.my-wishes li i {
+  color: var(--brightWhiteColor);
+}
