@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
 *,
 *::after,
 *::before {
@@ -6,18 +7,22 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 :root {
   --bodyBgColor: #030307;
   --brightWhiteColor: #f8f8ff;
   --inputColor: #dadadb;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
   background: var(--bodyBgColor);
 }
+
 ul {
   list-style: none;
 }
+
 section {
   display: grid;
   grid-template-rows: auto auto;
@@ -25,14 +30,17 @@ section {
   margin: 0 auto;
   padding: 10px 0;
 }
+
 header h1 {
   color: var(--brightWhiteColor);
 }
+
 header form {
   display: flex;
   flex-direction: column;
   margin: 15px 0 30px 0;
 }
+
 header form input {
   background: #1c222b;
   height: 25px;
@@ -44,9 +52,11 @@ header form input {
   text-indent: 20px;
   border-radius: 2px;
 }
+
 header form input::placeholder {
   color: var(--inputColor);
 }
+
 header form button {
   outline: none;
   border: none;
@@ -61,19 +71,28 @@ header form button {
 }
 
 .my-wishes li {
-  /* background: linear-gradient(to right, #da22ff, #9733ee); */
   display: flex;
   justify-content: space-between;
   padding: 15px 10px;
   align-items: center;
   border-radius: 3px;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .my-wishes li p {
   color: var(--brightWhiteColor);
   padding: 0 10px;
 }
+
 .my-wishes li i {
   color: var(--brightWhiteColor);
+}
+
+.my-wishes li i:first-of-type.active {
+  color: #56bc5b;
+}
+
+.my-wishes li i:last-of-type.active {
+  color: #f2b2b2;
 }
