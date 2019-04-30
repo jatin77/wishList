@@ -1,118 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <title>My Wishlist</title>
-  </head>
-  <body onload="fetchWishes()">
-    <section>
-      <!--------------------------header---------->
-      <header>
-        <h1>My Wishlist</h1>
-        <form>
-          <input type="text" class="input-list" placeholder="Your Wish" />
-          <button type="submit" class="btn-wish">Create Wish</button>
-        </form>
-      </header>
-      <!-----------------------------header end------->
-      <!-----------------------my wishes------------->
-      <ul class="my-wishes"></ul>
-      <!-----------------------my wishes end----------->
-    </section>
 
-    <script>
-      function _selector(element) {
-        return document.querySelector(element);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <title>My Wishlist</title>
+</head>
+
+<body onload="fetchWishes()">
+  <section>
+    <!--------------------------header---------->
+    <header>
+      <h1>My Wishlist</h1>
+      <form>
+        <input type="text" class="input-list" placeholder="Your Wish" />
+        <button type="submit" class="btn-wish">Create Wish</button>
+      </form>
+    </header>
+    <!-----------------------------header end------->
+    <!-----------------------my wishes------------->
+    <ul class="my-wishes">
+
+    </ul>
+    <!-----------------------my wishes end----------->
+  </section>
+
+  <script>
+    function _selector(element) {
+      return document.querySelector(element);
+    }
+    var inputField = _selector('.input-list');
+    var form = _selector('form');
+    var submitBtn = _selector('.btn-wish');
+    var wishUl = _selector('.my-wishes');
+    // color collection
+    let colors = [
+      'linear-gradient(to right, #da22ff, #9733ee)',
+      'linear-gradient(to right, #cc2b5e, #753a88)',
+      'linear-gradient(to right, #ec008c, #fc6767)',
+      'linear-gradient(to right, #0052d4, #4364f7, #6fb1fc)',
+      'linear-gradient(to right, #ff0099, #493240)',
+      'linear-gradient(to right, #8e2de2, #4a00e0)'
+    ];
+    //form submit listener
+    form.addEventListener('submit', getInput);
+    //get wish from input
+    function getInput(e) {
+      e.preventDefault();
+
+      var inputValue = inputField.value;
+      if (inputValue == '') {
+        return;
       }
-      var inputField = _selector('.input-list');
-      var form = _selector('form');
-      var submitBtn = _selector('.btn-wish');
-      var wishUl = _selector('.my-wishes');
-      // color collection
-      let colors = [
-        'linear-gradient(to right, #da22ff, #9733ee)',
-        'linear-gradient(to right, #cc2b5e, #753a88)',
-        'linear-gradient(to right, #ec008c, #fc6767)',
-        'linear-gradient(to right, #0052d4, #4364f7, #6fb1fc)',
-        'linear-gradient(to right, #ff0099, #493240)',
-        'linear-gradient(to right, #8e2de2, #4a00e0)'
-      ];
-      //form submit listener
-      form.addEventListener('submit', getInput);
-      //get wish from input
-      function getInput(e) {
-        e.preventDefault();
-
-        var inputValue = inputField.value;
-        if (inputValue == '') {
-          return;
-        }
-        //clear form
-        form.reset();
-        var wish = {
-          about: inputValue
-        };
-        if (localStorage.getItem('wishes') === null) {
-          var wishes = [];
-          wishes.push(wish);
-          localStorage.setItem('wishes', JSON.stringify(wishes));
-          fetchWishes();
-        } else {
-          var wishes = JSON.parse(localStorage.getItem('wishes'));
-          wishes.push(wish);
-          localStorage.setItem('wishes', JSON.stringify(wishes));
-
-          let randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-          let wishAbout = wishes[wishes.length - 1].about;
-          let wishLi = document.createElement('li');
-
-          wishLi.innerHTML = ` <i class="fas fa-check-circle"></i>
-            <p>
-             ${wishAbout}
-            </p>
-            <i class="fas fa-trash-alt"></i>`;
-
-          wishUl.appendChild(wishLi);
-          wishLi.style.background = `${randomColor}`;
-        }
-      }
-      //get wishes from local storage and display in dom
-      function fetchWishes() {
+      //clear form
+      form.reset();
+      var wish = {
+        about: inputValue
+      };
+      if (localStorage.getItem('wishes') === null) {
+        var wishes = [];
+        wishes.push(wish);
+        localStorage.setItem('wishes', JSON.stringify(wishes));
+        fetchWishes();
+      } else {
         var wishes = JSON.parse(localStorage.getItem('wishes'));
-        if (!wishes) {
-          return;
-        }
+        wishes.push(wish);
+        localStorage.setItem('wishes', JSON.stringify(wishes));
 
-        //loop over every wishes
-        for (let i = 0; i < wishes.length; i++) {
-          //slecting wish text
-          let wishAbout = wishes[i].about;
-          //creating wish
-          let wishLi = document.createElement('li');
-          //displaying wish to dom
-          wishLi.innerHTML = ` <i class="fas fa-check-circle"></i>
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        let wishAbout = wishes[wishes.length - 1].about;
+        let wishLi = document.createElement('li');
+
+        wishLi.innerHTML = ` <i class="fas fa-check-circle"></i>
             <p>
              ${wishAbout}
             </p>
-            <i class="fas fa-trash-alt"></i>`;
+            <i class="fas fa-trash-alt"></i>
+        `;
 
-          wishUl.appendChild(wishLi);
-          //random color generator
-          let randomColor = colors[Math.floor(Math.random() * colors.length)];
-          //random bg color for each wishes
-          wishLi.style.background = `${randomColor}`;
-        }
+        wishUl.appendChild(wishLi);
+        wishLi.style.background = `${randomColor}`;
       }
-    </script>
-  </body>
+    }
+    //get wishes from local storage and display in dom
+    function fetchWishes() {
+      var wishes = JSON.parse(localStorage.getItem('wishes'));
+      if (!wishes) {
+        return;
+      }
+
+      //loop over every wishes
+      for (let i = 0; i < wishes.length; i++) {
+        //slecting wish text
+        let wishAbout = wishes[i].about;
+        //creating wish
+        let wishLi = document.createElement('li');
+        //displaying wish to dom
+        wishLi.innerHTML = ` <i class="fas fa-check-circle done"></i>
+            <p>
+             ${wishAbout}
+            </p>
+            <i class="fas fa-trash-alt delete"></i>
+            `;
+
+        wishUl.appendChild(wishLi);
+        //random color generator
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        //random bg color for each wishes
+        wishLi.style.background = `${randomColor}`;
+      }
+    }
+
+    wishUl.addEventListener("click", function (e) {
+      if (e.target.classList.contains("delete")) {
+        let targetText = e.target.parentElement.querySelector("p").textContent.trim();
+        let targetWish = e.target.parentElement;
+        targetWish.remove();
+        let wishes = JSON.parse(localStorage.getItem("wishes"));
+        wishes.forEach((wish, index) => {
+          if (wish.about === targetText) {
+            wishes.splice(index, 1)
+          }
+        })
+        localStorage.setItem("wishes", JSON.stringify(wishes));
+      }
+
+    })
+  </script>
+</body>
+
 </html>
